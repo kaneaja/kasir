@@ -57,13 +57,13 @@
                                 </div>
                                 <div class="col-4 col-lg-2">
                                     <div class="d-flex align-items-center gap-2">
-                                        <button class="btn btn-sm btn-quantity rounded-circle">
+                                        <button wire:click= "quantityMinus({{ $item->id }})" class="btn btn-sm btn-quantity rounded-circle">
                                             <i class="bx bx-minus"></i>
                                         </button>
                                         <p class="mb-0 text-dark">
                                             {{$item->quantity}}
                                         </p>
-                                        <button class="btn btn-sm btn-quantity rounded-circle">
+                                        <button wire:click= "addToCart ({{ $item->menu->id }})"  class="btn btn-sm btn-quantity rounded-circle">
                                             <i class="bx bx-plus"></i>
                                         </button>
                                     </div>
@@ -72,7 +72,7 @@
                                     <p class="mb-0 text-dark fw-bold text-end">Rp {{number_format($item->quantity * $item->price)}}</p>
                                 </div>
                                 <div class="col-2 col-lg-1">
-                                    <button class="btn btn-sm btn-light btn-delete" type="button"><i
+                                    <button wire:click= "deleteDetail({{ $item->id }})" class="btn btn-sm btn-light btn-delete" type="button"><i
                                             class="bx bx-trash"></i></button>
                                 </div>
                             </div>  
@@ -82,18 +82,18 @@
 
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <p class="mb-0 text-secondary">Subtotal</p>
-                                <p class="mb-0 text-dark fw-bold">Rp. 229,000</p>
+                                <p class="mb-0 text-dark fw-bold">Rp {{number_format($transaction->subtotal)}}</p>
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
-                                <p class="mb-0 text-secondary">Pajak</p>
-                                <p class="mb-0 text-dark fw-bold">Rp. 12,000</p>
+                                <p class="mb-0 text-secondary">Pajak 10%</p>
+                                <p class="mb-0 text-dark fw-bold">Rp {{number_format ($transaction->subtotal * ($transaction->pax/100))}}</p>
                             </div>
 
                             <hr class="my-4" style="border-style: dashed;">
 
                             <div class="d-flex align-items-center justify-content-between mb-5">
                                 <p class="mb-0 text-secondary">Total</p>
-                                <p class="mb-0 text-dark fw-bold fs-5">Rp. 241,000</p>
+                                <p class="mb-0 text-dark fw-bold fs-5">Rp {{number_format($transaction->subtotal + ($transaction->subtotal * ($transaction->pax/100)) )}}</p>
                             </div>
 
                             <button class="btn btn-primary rounded-3 d-block py-3 w-100" type="button"

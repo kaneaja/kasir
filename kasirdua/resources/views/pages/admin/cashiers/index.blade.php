@@ -46,6 +46,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $users}}
                 </div>
             </div>
         </div>

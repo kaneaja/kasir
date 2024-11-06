@@ -37,7 +37,7 @@ class Kasir extends Component
                     'customer_name' => 'no name',
                     'cashier_id' => Auth::user()->id,
                     'subtotal' => $menu->price,
-                    'pax' => 15000
+                    'pax' => 10
                 ]);
                 TransactionDetail::create([
                     'transaction_id' => $lastTransaction->id,
@@ -71,7 +71,47 @@ class Kasir extends Component
                 ]);
             }
         }
+
+        
         $this->mount();
+    }
+
+    public function quantityMinus($id){
+        $transactionDetails = TransactionDetail::find($id);
+        $transactionDetails->transaction->update([
+            'subtotal' => $transactionDetails->transaction->subtotal - $transactionDetails->price
+        ]);
+        $transactionDetails->menu->update([
+            'stock' => $transactionDetails->menu->stock + 1
+        ]);
+
+        if ($transactionDetails->quantity == 1) {
+            if($transactionDetails->transaction-> details->sum('quantity') == 1){
+                $transactionDetails->transaction->delete();
+            }
+            $transactionDetails->delete();
+        } else {
+            $transactionDetails->update([
+                'quantity' => $transactionDetails->quantity - 1
+            ]);
+        }
+        $this->mount();
+    }
+
+    public function deleteDetail($id){
+        $transactionDetails = TransactionDetail::find($id);
+        $transactionDetails->transaction->update([
+            'subtotal' => $transactionDetails->transaction->subtotal - ($transactionDetails->price * $transactionDetails->quantity)
+        ]);
+        $transactionDetails->menu->update([
+            'stock' => $transactionDetails->menu->stock + $transactionDetails->quantity
+        ]);
+        if ($transactionDetails->transaction->details->count() == 1) {
+            $transactionDetails->transaction->delete();
+        }
+        $transactionDetails->delete();
+        $this->mount();
+
     }
 
     public function mount()
