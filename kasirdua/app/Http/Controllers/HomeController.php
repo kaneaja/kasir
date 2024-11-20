@@ -12,3 +12,4 @@ class HomeController extends Controller
         return view('pages.kasir.index');
     }
 }
+// lallal
