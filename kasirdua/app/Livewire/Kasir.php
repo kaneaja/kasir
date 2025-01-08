@@ -10,7 +10,9 @@ use Livewire\Component;
 
 class Kasir extends Component
 {
-    public $menus, $category = 'semua', $transaction;
+    public $menus, $category = 'semua', $transaction , $customer_name, $pay, $total = 0;
+
+
 
     public function filter($category)
     {
@@ -112,6 +114,26 @@ class Kasir extends Component
         $transactionDetails->delete();
         $this->mount();
 
+    }
+
+    public function checkout(){
+        $transaction = $this->transaction;
+
+        foreach ($transaction->details as $item){
+            $this->total += $item->price * $item->quantity; 
+        }
+
+        $this->total += ($transaction->subtotal * ($transaction->pax / 100));
+
+        $transaction->update([
+            'customer_name'=> $this->customer_name,
+            'total'=> $this->total,
+            'pay'=> $this->pay,
+            'return'=>$this->pay - $this->total,
+            'status'=> 'waiting'
+        ]);
+        
+        return $this->redirectRoute( 'kasir.success', $transaction->id, navigate:true );
     }
 
     public function mount()

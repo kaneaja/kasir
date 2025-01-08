@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,5 +12,14 @@ class HomeController extends Controller
     {
         return view('pages.kasir.index');
     }
+    
+    public function success($id){
+        return view('pages.kasir.success', [
+            'transaction' => Transaction::find($id)    
+        ]);
+    }
 }
+
+
+
 // lallal

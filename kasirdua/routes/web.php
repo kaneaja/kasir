@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
+route::get('/transaksi-sukses/{id}', [HomeController::class, 'success'])->name('kasir.success');
 
 
 Route::prefix('admin')-> middleware(['auth', isAdmin::class])-> group(function(){
