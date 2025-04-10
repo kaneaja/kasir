@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="dashboard-pendapatan.html" class="nav-link px-4">
+                        <a href="{{url('admin/pendapatan')}}" class="nav-link px-4">
                             <i class="bx bx-money"></i> Pendapatan
                         </a>
                     </li>

@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarMenu">
                 <ul class="navbar-nav me-auto gap-2">
                     <li class="nav-item">
-                        <a href="." class="nav-link active px-4">Kasir</a>
+                        <a href="." class="nav-link px-4 {{ Request::is('/') ? 'active' : ''}}">Kasir</a>
                     </li>
                     <li class="nav-item">
-                        <a href="order-list.html" class="nav-link px-4">Order List</a>
+                        <a href="{{route('kasir.order-list')}}" class="nav-link px-4 {{ Request::is('order-list') ? 'active' : ''}}">Order List</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

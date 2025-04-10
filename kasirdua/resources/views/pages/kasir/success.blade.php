@@ -62,6 +62,9 @@
                         </div>
 
                         <a href="/" class="btn btn-primary d-block mt-5">Kembali ke Kasir</a>
+                        <a href="{{route('kasir.print', $transaction->id)}}" class="btn btn-secondary d-block mt-5">cetak
+                        <i class="bx bx-print"></i>
+                        </a>
                     </div>
                 </div>
             </div>

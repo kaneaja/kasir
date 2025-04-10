@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CashierController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\IncomeController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\isAdmin;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 route::get('/transaksi-sukses/{id}', [HomeController::class, 'success'])->name('kasir.success');
+route::get('/transaksi-sukses/print/{id}', [HomeController::class, 'print'])->name('kasir.print');
+
+route::get('order-list', [HomeController::class, 'order_list'])->name('kasir.order-list');
+route::post('order-list', [HomeController::class, 'order_list_status'])->name('kasir.order-list.status');
 
 
 Route::prefix('admin')-> middleware(['auth', isAdmin::class])-> group(function(){
@@ -32,6 +37,8 @@ Route::prefix('admin')-> middleware(['auth', isAdmin::class])-> group(function()
     Route::get('/menu/{id}/edit', [MenuController::class, 'edit'])->name('menu.edit');
 
     Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
+
+    Route::get('/pendapatan', [IncomeController::class, 'index'])->name('incomes.index');
 });
 
 auth::routes(['register' =>false]);

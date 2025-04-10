@@ -25,7 +25,7 @@
                         <button class="btn btn-primary" type="submit">
                             <i class="bx bx-save"></i> Simpan Baru
                         </button>
-                        <a href="{{url('kasir')}}" class="btn btn-danger">
+                        <a href="{{ route('cashiers.index') }}" class="btn btn-danger">
                             <i class="bx bx-arrow-back"></i> Kembali
                         </a>
                     </div>

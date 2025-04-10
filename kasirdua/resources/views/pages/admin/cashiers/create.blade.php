@@ -24,7 +24,7 @@
                         <button class="btn btn-primary" type="submit">
                             <i class="bx bx-save"></i> Simpan Baru
                         </button>
-                        <a href="{{url('kasir')}}" class="btn btn-light">
+                        <a href="{{url('cashiers.index')}}" class="btn btn-light">
                             <i class="bx bx-arrow-back"></i> Kembali
                         </a>
                     </div>
