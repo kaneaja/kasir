@@ -37,8 +37,6 @@
                         </div>
                     </div>
                     @endforeach
-                    <!-- MULAI DELETE -->
-                    <!-- BATAS DELETE -->
                 </div>
             </div>
             <div class="col-md-5">

@@ -10,7 +10,7 @@
     <x-style/>
 </head>
 
-<body class="bg-soft-blue">
+<body class="bg-soft-blue" data-theme="light">
     <nav class="navbar navbar-expand-lg bg-white py-3">
         <div class="container-fluid">
             <a href="." class="navbar-brand logo">
@@ -45,6 +45,11 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
+                    <li class="nav-item d-flex align-items-center me-3">
+                        <button class="dark-mode-toggle" id="darkModeToggle" type="button" aria-label="Toggle dark mode">
+                            <i class="bx bx-moon" id="darkModeIcon"></i>
+                        </button>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -52,6 +57,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end mt-2">
                             <li><a class="dropdown-item" href="#">Setting</a></li>
+                            <li>
+                                <a class="dropdown-item" href="{{url('/')}}">
+                                    <i class="bx bx-shopping-bag"></i> Kasir
+                                </a>
+                            </li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -81,6 +91,60 @@
     </footer>
 
     <x-script />
+    <script>
+        // Dark Mode Toggle
+        (function() {
+            try {
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                const darkModeIcon = document.getElementById('darkModeIcon');
+                const body = document.body;
+                
+                // Skip if elements not found
+                if (!darkModeToggle || !darkModeIcon || !body) return;
+                
+                // Check for saved theme preference or default to light mode
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                
+                // Apply the theme
+                body.setAttribute('data-theme', currentTheme);
+                updateIcon(currentTheme);
+                
+                // Toggle dark mode
+                darkModeToggle.addEventListener('click', function() {
+                    try {
+                        const currentTheme = body.getAttribute('data-theme');
+                        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                        
+                        body.setAttribute('data-theme', newTheme);
+                        localStorage.setItem('theme', newTheme);
+                        updateIcon(newTheme);
+                    } catch (e) {
+                        console.error('Error toggling dark mode:', e);
+                    }
+                });
+                
+                function updateIcon(theme) {
+                    try {
+                        if (theme === 'dark') {
+                            darkModeIcon.classList.remove('bx-moon');
+                            darkModeIcon.classList.add('bx-sun');
+                        } else {
+                            darkModeIcon.classList.remove('bx-sun');
+                            darkModeIcon.classList.add('bx-moon');
+                        }
+                    } catch (e) {
+                        console.error('Error updating icon:', e);
+                    }
+                }
+            } catch (e) {
+                console.error('Error initializing dark mode:', e);
+                // Fallback: ensure light mode if error occurs
+                if (document.body) {
+                    document.body.setAttribute('data-theme', 'light');
+                }
+            }
+        })();
+    </script>
 </body>
 
 </html>

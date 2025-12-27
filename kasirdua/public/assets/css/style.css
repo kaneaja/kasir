@@ -4,6 +4,30 @@
   --bs-primary: #4564e5;
   --soft-blue: #f1f5fb;
   --white: #FFFFFF;
+  
+  /* Light mode colors (default) */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #f1f5fb;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --card-bg: #FFFFFF;
+}
+
+[data-theme="dark"] {
+  /* Dark mode colors */
+  --soft-blue: #1a1d29;
+  --bg-primary: #1a1d29;
+  --bg-secondary: #242633;
+  --text-primary: #e9ecef;
+  --text-secondary: #adb5bd;
+  --border-color: #343a46;
+  --card-bg: #242633;
+}
+
+/* Dark mode bg-soft-blue override */
+[data-theme="dark"] .bg-soft-blue {
+  background-color: var(--bg-secondary);
 }
 
 * {
@@ -46,6 +70,18 @@ a {
 
 .bg-soft-blue {
   background-color: var(--soft-blue);
+  transition: background-color 0.3s ease;
+}
+
+/* Fallback: ensure bg-soft-blue works in light mode */
+body:not([data-theme="dark"]) .bg-soft-blue {
+  background-color: #f1f5fb;
+}
+
+body[data-theme="dark"] {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .fs-7 {
@@ -91,7 +127,13 @@ a {
 .btn-quantity, .btn-delete {
     width: 30px;
     height: 30px;
-    background-color: var(--soft-blue);
+    background-color: #f1f5fb;
+}
+
+/* Dark mode override for btn-quantity */
+[data-theme="dark"] .btn-quantity,
+[data-theme="dark"] .btn-delete {
+    background-color: var(--bg-secondary);
 }
 
 .btn-quantity:hover {
@@ -144,6 +186,14 @@ a {
   border-radius: 1rem;
   border: 1px solid transparent;
   transition: 0.3s all ease;
+  background-color: #FFFFFF;
+  color: #212529;
+}
+
+/* Dark mode card styling - only applies when data-theme="dark" */
+[data-theme="dark"] .card {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
 }
 
 .card:hover {
@@ -152,6 +202,21 @@ a {
 
 .card .card-title {
     font-size: 18px;
+    color: #212529;
+}
+
+/* Dark mode card overrides */
+[data-theme="dark"] .card {
+  border-color: var(--border-color);
+}
+
+/* Dark mode card with border-0 (no border in dark mode too) */
+[data-theme="dark"] .card.border-0 {
+  border: 0;
+}
+
+[data-theme="dark"] .card .card-title {
+  color: var(--text-primary);
 }
 
 .table thead tr th {
@@ -159,4 +224,270 @@ a {
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
+}
+
+/* Dark mode table header */
+[data-theme="dark"] .table thead tr th {
+  color: #8b949e !important;
+  background-color: transparent !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Dark mode table thead background */
+[data-theme="dark"] .table thead {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .table thead tr {
+  background-color: transparent;
+}
+
+/* Dark mode navbar */
+[data-theme="dark"] .navbar {
+  background-color: var(--bg-secondary) !important;
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .bg-white {
+  background-color: var(--bg-secondary) !important;
+}
+
+[data-theme="dark"] .navbar .navbar-brand,
+[data-theme="dark"] .navbar .nav-link {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .navbar .nav-link:hover,
+[data-theme="dark"] .navbar .nav-link.active {
+  background-color: var(--bs-primary) !important;
+  color: var(--white) !important;
+}
+
+/* Dark mode text colors */
+[data-theme="dark"] .text-dark {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-secondary {
+  color: var(--text-secondary) !important;
+}
+
+/* Dark mode form controls */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+  background-color: var(--bg-secondary);
+  border-color: var(--bs-primary);
+  color: var(--text-primary);
+}
+
+/* Dark mode buttons - btn-quantity and btn-delete handled above with fallback */
+
+[data-theme="dark"] .btn-light {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Dark mode modal */
+[data-theme="dark"] .modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .modal-header {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .modal-footer {
+  border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1);
+}
+
+/* Dark mode dropdown */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Dark mode hr */
+[data-theme="dark"] hr {
+  border-color: var(--border-color);
+}
+
+/* Dark mode border-bottom */
+[data-theme="dark"] .border-bottom {
+  border-bottom-color: var(--border-color) !important;
+}
+
+/* Dark mode input group */
+[data-theme="dark"] .input-group-text {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Dark mode table */
+[data-theme="dark"] .table {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+  border-color: var(--border-color);
+}
+
+/* Dark mode table-striped */
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > td,
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd) > th {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(even) > td,
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(even) > th {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+/* Dark mode table tbody */
+[data-theme="dark"] .table tbody tr {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .table tbody td {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Dark mode table hover (if using table-hover) */
+[data-theme="dark"] .table-hover > tbody > tr:hover > td,
+[data-theme="dark"] .table-hover > tbody > tr:hover > th {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Dark mode pagination links in table */
+[data-theme="dark"] .table-responsive {
+  border-color: var(--border-color);
+}
+
+/* Dark mode labels */
+[data-theme="dark"] label {
+  color: var(--text-primary);
+}
+
+/* Dark mode alert (if used in forms) */
+[data-theme="dark"] .alert {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #f5c6cb;
+}
+
+[data-theme="dark"] .alert ul {
+  color: var(--text-primary);
+}
+
+/* Ensure table text colors work properly in all cases */
+[data-theme="dark"] .table thead {
+  background-color: transparent;
+}
+
+[data-theme="dark"] .table tbody {
+  background-color: transparent;
+}
+
+/* Dark mode pagination (for table pagination) */
+[data-theme="dark"] .pagination .page-link {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .pagination .page-link:hover {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .pagination .page-item.active .page-link {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+  color: var(--white);
+}
+
+[data-theme="dark"] .pagination .page-item.disabled .page-link {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Dark mode toggle button */
+.dark-mode-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background-color: var(--bg-secondary);
+}
+
+[data-theme="dark"] .dark-mode-toggle:hover {
+  background-color: var(--bg-primary);
+}
+
+.dark-mode-toggle i {
+  font-size: 20px;
+}
+
+/* Dark mode navbar toggler icon */
+[data-theme="dark"] .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(233, 236, 239, 0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Dark mode footer */
+[data-theme="dark"] footer {
+  color: var(--text-secondary);
+}
+
+/* Dark mode main content */
+[data-theme="dark"] main {
+  color: var(--text-primary);
+}
+
+/* Dark mode shadow */
+[data-theme="dark"] .shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.3) !important;
 }
